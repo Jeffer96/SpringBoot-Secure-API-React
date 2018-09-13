@@ -28,7 +28,7 @@ public class UserServiceImpl
     @PostConstruct
     private void populateSampleData()
     {
-        users.add( new User( "test@mail.com", "password", "Andres", "Perez" ) );
+        users.add( new User( "jefferson.castaneda@mail.escuelaing.edu.co", "123456", "Jefferson", "Castañeda" ) );
     }
 
 
@@ -39,16 +39,26 @@ public class UserServiceImpl
     }
 
     @Override
-    public User getUser( Long id )
+    public User getUser( int id )
     {
-        return users.get( 0 );
+        return users.get( id );
     }
 
     @Override
     public User createUser( User user )
     {
-        return users.get( 0 );
+        return users.get( user );
     }
+	
+	@Override
+    public User findUserByUsername( String username )
+    {
+        for(User user: users){
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+       
 
     @Override
     public User findUserByEmail( String email )
@@ -59,7 +69,12 @@ public class UserServiceImpl
     @Override
     public User findUserByEmailAndPassword( String email, String password )
     {
-        return users.get( 0 );
+        for(User user: users){
+            if(user.getEmail().equals(email) && user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
     }
 
 }
